@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useHistory } from 'react-router';
 
-import Button,{ OutlineButton } from "../button/Button";
+import Button, { OutlineButton } from "../button/Button";
 
 import './movie-grid.scss';
 
 import MovieCard from '../movie-card/MovieCard';
 import Input from '../input/Input';
 import tmdbApi, { movieType, category, tvType } from '../../api/tmdbApi';
+
 
 const MovieGrid = props => {
     const [items, setItems] = useState([]);
@@ -70,6 +71,7 @@ const MovieGrid = props => {
         setPage(page + 1);
     }
 
+
     return (
         <>
             <div className="section mb-3">
@@ -95,14 +97,14 @@ const MovieGrid = props => {
 
 const MovieSearch = props => {
 
-    const history = useHistory();
+    let history = useHistory();
 
     const [keyword, setKeyword] = useState(props.keyword ? props.keyword : '');
 
     const goToSearch = useCallback(
         () => {
             if (keyword.trim().length > 0) {
-                history.push(`${category[props.category]}/search/${keyword}`);
+                history.push(`/${category[props.category]}/search/${keyword}`);
             }
         },
         [keyword, props.category, history]
